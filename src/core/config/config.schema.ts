@@ -19,7 +19,7 @@ export const schema = Joi.object({
 
     LOG_NAME: Joi.string()
         .description('name of the log')
-        .default('planning'),
+        .default('timer-producer'),
     LOG_LEVEL: Joi.string()
         .valid(
             LogLevel.Info,
