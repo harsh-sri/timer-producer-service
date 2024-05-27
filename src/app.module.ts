@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService, LoggerModule } from './core';
+import { sLog } from './common/constants/slog.constant';
 
 @Module({
   imports: [
@@ -7,6 +8,6 @@ import { ConfigModule, ConfigService, LoggerModule } from './core';
     LoggerModule
   ],
   controllers: [],
-  providers: [ConfigService],
+  providers: [ConfigService, sLog],
 })
 export class AppModule {}
