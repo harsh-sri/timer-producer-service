@@ -1,5 +1,5 @@
 import * as Joi from "joi";
-import { LogLevel } from "../logger/enum/log-level.enum";
+import { LogLevel } from "src/common/enums/log-level.enum";
 
 export const schema = Joi.object({
     NODE_ENV: Joi.string()
