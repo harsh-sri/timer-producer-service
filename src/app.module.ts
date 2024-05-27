@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService, LoggerModule } from './core';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot(),
+    LoggerModule
+  ],
   controllers: [],
-  providers: [],
+  providers: [ConfigService],
 })
 export class AppModule {}
