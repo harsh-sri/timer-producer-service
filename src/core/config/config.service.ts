@@ -17,10 +17,12 @@ export class ConfigService extends NestConfigService {
 
     // TODO: could be an array of brokers
     get kafka(): {
-        broker: string
+        broker: string;
+        sleepTime: number;
     } {
         return {
-            broker: this.get('KAFKA_BROKER')
+            broker: this.get('KAFKA_BROKER'),
+            sleepTime: this.get('KAFKA_SLEEP_TIME')
         }
     }
 
