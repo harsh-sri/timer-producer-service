@@ -4,6 +4,7 @@ import { sLog } from './common/constants/slog.constant';
 import { HealthCheckModule } from './health-check/health-check.module';
 import { KafkaModule } from './kafka/kafka.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TimerModule } from './timer/timer.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     LoggerModule,
     HealthCheckModule,
-    KafkaModule
+    KafkaModule,
+    TimerModule
   ],
   controllers: [],
   providers: [ConfigService, sLog],
