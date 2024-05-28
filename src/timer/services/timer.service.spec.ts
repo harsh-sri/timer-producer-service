@@ -162,4 +162,40 @@ describe('TimerService', () => {
             }
         })
     });
+
+    describe('getTimer', () => {
+        it('should return the timer if it exists', async () => {
+            jest.spyOn(timerRepository, 'findOne').mockResolvedValueOnce(timerResponse);
+            let error, result;
+            try {
+                result = await service.getTimer({ timerId })
+            } catch (e) {
+                error = e;
+            } finally {
+                expect(error).toBeUndefined();
+                expect(result).toBeDefined();
+                expect(result.timerId).toBeDefined();
+                expect(result.timerId).toEqual(timerId);
+                expect(result.timerStatus).toBeDefined();
+                expect(result.timerStatus).toEqual(timerResponse.timerStatus);
+                expect(result.timeLeft).toBeDefined();
+            }
+        });
+
+        it('should return not found if timer does not exists', async () => {
+            jest.spyOn(timerRepository, 'findOne').mockResolvedValueOnce(null);
+            let error, result;
+            try {
+                result = await service.getTimer({ timerId })
+            } catch (e) {
+                error = e.response;
+                error.status = e.status;
+            } finally {
+                expect(error).toBeDefined();
+                expect(error.details.message).toEqual(`timer by timerId: ${timerId}, not found`);
+                expect(error.status).toEqual(HttpStatusCodes.NOT_FOUND);
+                expect(result).toBeUndefined();
+            }
+        });
+    })
 });

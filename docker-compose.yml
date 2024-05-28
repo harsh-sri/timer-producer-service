@@ -10,6 +10,7 @@ services:
       - '9229:9229'
     depends_on:
       - mongo
+      - zookeeper
       - kafka
     env_file:
       - ./.env
@@ -27,9 +28,14 @@ services:
     restart: always
     ports:
       - '27017:27017'
+  zookeeper:
+    image: wurstmeister/zookeeper
   kafka:
-    image: apache/kafka:3.7.0
-    hostname: localhost
-    restart: always
+    image: wurstmeister/kafka
     ports:
-      - '9092:9092'
+    - "9092:9092"
+    hostname: 'kafka-internal.io'
+    restart: always
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka-internal.io
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181

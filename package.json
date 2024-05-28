@@ -71,16 +71,26 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      ".+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.(t|j)s",
+      "!**/*.module.(t|j)s",
+      "!**/*.entity.(t|j)s",
+      "!**/main.(t|j)s",
+      "!**/newrelic.(t|j)s"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/common/"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    },
+    "rootDir": "src"
   },
   "husky": {
     "hooks": {
