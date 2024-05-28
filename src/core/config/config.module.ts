@@ -20,7 +20,7 @@ export class ConfigModule {
                         allowUnknown: true,
                         abortEarly: true
                     }
-                })
+                }),
             ],
             providers: [ConfigService],
             exports: [ConfigService]

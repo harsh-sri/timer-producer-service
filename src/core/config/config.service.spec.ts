@@ -48,4 +48,16 @@ describe("ConfigService", () => {
             });
         });
     });
+
+    describe('Kafka', () => {
+        it('should return log configuration from process.env', async () => {
+            process.env.KAFKA_BROKER = 'localhost:3000';
+            process.env.KAFKA_SLEEP_TIME = '200';
+
+            expect(service.kafka).toEqual({
+                broker: 'localhost:3000',
+                sleepTime: '200'
+            });
+        });
+    });
 });

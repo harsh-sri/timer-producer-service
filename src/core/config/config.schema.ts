@@ -1,5 +1,5 @@
 import * as Joi from "joi";
-import { LogLevel } from "src/common/enums/log-level.enum";
+import { LogLevel } from "../logger/enums/log-level.enum";
 
 export const schema = Joi.object({
     NODE_ENV: Joi.string()
@@ -14,6 +14,7 @@ export const schema = Joi.object({
     
     // Kafka
     KAFKA_BROKER: Joi.string().default('localhost:9092'),
+    KAFKA_SLEEP_TIME: Joi.number().default(5000),
 
     // Logger
 
