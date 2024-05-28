@@ -76,6 +76,10 @@ $ npm run test:cov
 http://localhost:3000/docs
 ```
 
+## POSTMAN Collection
+Please find the postman collection under `postman_collection` folder and import it into postman
+
+
 ## Potential Improvements
 - Cache integration to reduce the load from DB for read requests (Get Timer API)
 - Multiple broker support

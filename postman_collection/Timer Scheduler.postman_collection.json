@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "e56a57f8-451e-434e-8edb-057dfb7ca36b",
+		"name": "Timer Scheduler",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "220768"
+	},
+	"item": [
+		{
+			"name": "Create Timer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"webhookUrl\": \"http://www.localhost:3000/v1/health\",\n    \"hours\": 1,\n    \"minutes\": 2,\n    \"seconds\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/timer",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"timer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Timer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/timer/4aa572ec-58f5-4b22-afe4-e6cd32394675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"timer",
+						"4aa572ec-58f5-4b22-afe4-e6cd32394675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/health",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
