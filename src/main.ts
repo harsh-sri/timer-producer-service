@@ -6,6 +6,9 @@ import { setupApiDoc } from './common/docs/doc';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('/api', {
+    exclude: ['health'],
+  });
   const configService: ConfigService = app.get(ConfigService);
   const port = configService.get("PORT");
   await setupApiDoc(app);
