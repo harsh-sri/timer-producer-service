@@ -2,6 +2,8 @@ import { Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { RedocModule, RedocOptions } from '@jozefazz/nestjs-redoc';
 import { apiDescription, apiTitle, xTagGroups } from './constants';
+import { HealthCheckModule } from 'src/health-check/health-check.module';
+import { TimerModule } from 'src/timer/timer.module';
 
 const setup = async (
   app,
@@ -18,6 +20,8 @@ const setup = async (
 
   const document = SwaggerModule.createDocument(app, options, {
     include: [
+      TimerModule, 
+      HealthCheckModule,
       ...moduleToIncludes,
     ],
   });
