@@ -9,6 +9,8 @@ import { MongoRepository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { AppLogger } from "src/core";
 import { UnExpectedErrorException } from "src/common/exceptions/unexpected-error.exception";
+import { GetTimerDto } from "../dto/get-timer.dto";
+import { NotFoundException } from "src/common/exceptions/not-found.exception";
 
 @Injectable()
 export class TimerService {
@@ -61,5 +63,25 @@ export class TimerService {
                 }
             })
        }
+    }
+
+    async getTimer(getTimerDto: GetTimerDto): Promise<ITimerResponse> {
+        const timer = await this.timerRepository.findOne({
+            where: {
+                timerId: getTimerDto.timerId
+            },
+        });
+        if (!timer) {
+            throw new NotFoundException({
+                details: {
+                    message: `timer by timerId: ${getTimerDto.timerId}, not found`,
+                },
+            });
+        }
+        return {
+            timerId: timer.timerId,
+            timerStatus: timer.timerStatus,
+            timeLeft: this.calculateTimeLeft(timer.expiryTime)
+        };
     }
 }
