@@ -1,0 +1,35 @@
+version: '3'
+services:
+  timer-producer-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: timer-producer-service
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+    depends_on:
+      - mongo
+      - kafka
+    env_file:
+      - ./.env
+    volumes:
+      - ./src:/timer-producer-service/src
+      - ./static:/timer-producer-service/static
+      - ./test:/timer-producer-service/test
+      - ./tsconfig.json:/timer-producer-service/tsconfig.json
+      - ./tsconfig.build.json:/timer-producer-service/tsconfig.build.json
+      - ./nest-cli.json:/timer-producer-service/nest-cli.json
+    restart: always
+  mongo:
+    image: mongo:6.0.13-jammy
+    hostname: mongo
+    restart: always
+    ports:
+      - '27017:27017'
+  kafka:
+    image: apache/kafka:3.7.0
+    hostname: localhost
+    restart: always
+    ports:
+      - '9092:9092'
