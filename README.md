@@ -72,3 +72,12 @@ $ npm run test:cov
 
 ## API Doc
 
+```
+http://localhost:3000/docs
+```
+
+## Potential Improvements
+- Cache integration to reduce the load from DB for read requests (Get Timer API)
+- Multiple broker support
+    - Or, choose an fully managed service like event bridge (investigation is required)
+ 
