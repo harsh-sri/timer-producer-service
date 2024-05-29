@@ -140,6 +140,8 @@ describe('TimerService', () => {
                 expect(result.timerStatus).toBeDefined();
                 expect(result.timerStatus).toEqual(TimerStatus.Scheduled);
                 expect(result.timeLeft).toBeDefined();
+                expect(producerServiceMock.produce).toHaveBeenCalled();
+                expect(producerServiceMock.produce).toHaveBeenCalledTimes(1);
             }
         });
 
