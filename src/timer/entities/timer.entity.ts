@@ -9,7 +9,7 @@ export class TimerEntity {
     @ObjectIdColumn()
     _id: ObjectId
 
-    @ObjectIdColumn()
+    @Column()
     timerId: UUID;
 
     @Column()
