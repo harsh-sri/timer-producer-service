@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { MongoRepository } from "typeorm";
 import { v4 } from 'uuid';
 import { TimerService } from "./timer.service";
 import { TimerEntity } from "../entities/timer.entity";
@@ -17,7 +17,7 @@ class timerRepositoryFake {
 
 describe('TimerService', () => {
     let service: TimerService;
-    let timerRepository: Repository<TimerEntity>;
+    let timerRepository: MongoRepository<TimerEntity>;
     let logger: AppLogger;
     let createTimerPayload: CreateTimerDto;
     let timerResponse;
@@ -140,6 +140,8 @@ describe('TimerService', () => {
                 expect(result.timerStatus).toBeDefined();
                 expect(result.timerStatus).toEqual(TimerStatus.Scheduled);
                 expect(result.timeLeft).toBeDefined();
+                expect(producerServiceMock.produce).toHaveBeenCalled();
+                expect(producerServiceMock.produce).toHaveBeenCalledTimes(1);
             }
         });
 

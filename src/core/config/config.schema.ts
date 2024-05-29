@@ -13,7 +13,7 @@ export const schema = Joi.object({
     MONGO_MAX_POOL_SIZE: Joi.number().default(10),
     
     // Kafka
-    KAFKA_BROKER: Joi.string().default('kafka-internal.io:9092'), // TODO: this should be an array of brokers
+    KAFKA_BROKER: Joi.string().default('localhost:9092'), // TODO: this should be an array of brokers
     KAFKA_SLEEP_TIME: Joi.number().default(5000),
 
     // Logger

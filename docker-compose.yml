@@ -8,10 +8,6 @@ services:
     ports:
       - '3000:3000'
       - '9229:9229'
-    depends_on:
-      - mongo
-      - zookeeper
-      - kafka
     env_file:
       - ./.env
     volumes:
@@ -22,20 +18,3 @@ services:
       - ./tsconfig.build.json:/timer-producer-service/tsconfig.build.json
       - ./nest-cli.json:/timer-producer-service/nest-cli.json
     restart: always
-  mongo:
-    image: mongo:6.0.13-jammy
-    hostname: mongo
-    restart: always
-    ports:
-      - '27017:27017'
-  zookeeper:
-    image: wurstmeister/zookeeper
-  kafka:
-    image: wurstmeister/kafka
-    ports:
-    - "9092:9092"
-    hostname: 'kafka-internal.io'
-    restart: always
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: kafka-internal.io
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
