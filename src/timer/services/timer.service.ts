@@ -23,6 +23,7 @@ export class TimerService {
         this.logger.setContext(TimerService.name)
     }
 
+    // This can be moved to a library/module
     private calculateExpiryTime(timeLeft: number): Date {
         return new Date(Date.now() + timeLeft * 1000)
     }
