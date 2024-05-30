@@ -1,8 +1,8 @@
 import {
-    ArgumentMetadata,
-    Injectable,
-    Type,
-    ValidationPipe as NestJsValidationPipe,
+  ArgumentMetadata,
+  Injectable,
+  Type,
+  ValidationPipe as NestJsValidationPipe,
 } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
@@ -12,61 +12,61 @@ import { IBaseHttpExceptionDetails } from '../exceptions/interfaces/base-excepti
 
 @Injectable()
 export class ValidationPipe extends NestJsValidationPipe {
-    constructor(args?) {
-        super(args);
+  constructor(args?) {
+    super(args);
+  }
+
+  // eslint-disable-next-line
+  async transform(value: any, { metatype }: ArgumentMetadata) {
+    if (!metatype || !this.canValidate(metatype)) {
+      return value;
     }
 
-    // eslint-disable-next-line
-    async transform(value: any, { metatype }: ArgumentMetadata) {
-        if (!metatype || !this.canValidate(metatype)) {
-            return value;
+    const object = plainToClass(metatype, value);
+
+    const errors: ValidationError[] = await validate(object);
+
+    if (errors.length > 0) {
+      throw new BadRequestException({
+        details: this.formatErrorMessages(errors),
+      });
+    }
+    return object;
+  }
+
+  // eslint-disable-next-line
+  private canValidate(metatype: Type<any>): boolean {
+    const types = [String, Boolean, Number, Array, Object];
+    return !types.find((type) => metatype === type);
+  }
+
+  private formatErrorMessages(
+    errors: ValidationError[],
+    accumulator = {},
+    objectPath = '',
+  ): IBaseHttpExceptionDetails {
+    return errors.reduce((acc, error: ValidationError) => {
+      const originalProperty = error.property;
+
+      if (objectPath) {
+        if (typeof error.target === 'function') {
+          error.property = objectPath;
+        } else {
+          error.property = `${objectPath}.${error.property}`;
         }
+      }
 
-        const object = plainToClass(metatype, value);
+      if (error.constraints) {
+        acc[error.property] = map(error.constraints, (value: string) => {
+          return value.replace(`${originalProperty} `, '');
+        }).join(', ');
+      }
 
-        const errors: ValidationError[] = await validate(object);
+      if (error.children) {
+        return this.formatErrorMessages(error.children, acc, error.property);
+      }
 
-        if (errors.length > 0) {
-            throw new BadRequestException({
-                details: this.formatErrorMessages(errors),
-            });
-        }
-        return object;
-    }
-
-    // eslint-disable-next-line
-    private canValidate(metatype: Type<any>): boolean {
-        const types = [String, Boolean, Number, Array, Object];
-        return !types.find(type => metatype === type);
-    }
-
-    private formatErrorMessages(
-        errors: ValidationError[],
-        accumulator = {},
-        objectPath = '',
-    ): IBaseHttpExceptionDetails {
-        return errors.reduce((acc, error: ValidationError) => {
-            const originalProperty = error.property;
-
-            if (objectPath) {
-                if (typeof error.target === 'function') {
-                    error.property = objectPath;
-                } else {
-                    error.property = `${objectPath}.${error.property}`;
-                }
-            }
-
-            if (error.constraints) {
-                acc[error.property] = map(error.constraints, (value: string) => {
-                    return value.replace(`${originalProperty} `, '');
-                }).join(', ');
-            }
-
-            if (error.children) {
-                return this.formatErrorMessages(error.children, acc, error.property);
-            }
-
-            return acc;
-        }, accumulator);
-    }
+      return acc;
+    }, accumulator);
+  }
 }

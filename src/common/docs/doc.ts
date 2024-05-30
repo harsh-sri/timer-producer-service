@@ -19,11 +19,7 @@ const setup = async (
     .build();
 
   const document = SwaggerModule.createDocument(app, options, {
-    include: [
-      TimerModule, 
-      HealthCheckModule,
-      ...moduleToIncludes,
-    ],
+    include: [TimerModule, HealthCheckModule, ...moduleToIncludes],
   });
 
   document['x-tagGroups'] = [...extraXTagGroups, ...xTagGroups];
@@ -44,6 +40,6 @@ const setup = async (
   return document;
 };
 
-export const setupApiDoc = async app => {
+export const setupApiDoc = async (app) => {
   await setup(app, [], '/docs', [], '1.0.0');
 };

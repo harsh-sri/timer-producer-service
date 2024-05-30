@@ -13,7 +13,6 @@ import { ExceptionSerializer } from './serializers/exception.serializer';
 @Catch()
 export class ExceptionFilter implements NestExceptionFilter<BaseHttpException> {
   catch(exception: BaseHttpException, host: ArgumentsHost) {
-
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const status =
