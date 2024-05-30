@@ -1,4 +1,3 @@
-import { UUID } from 'bson';
 import { IsDate, IsDefined, IsEnum, IsInt, IsString } from 'class-validator';
 import { TimerStatus } from 'src/common/enums/timer-status.enum';
 import { Column, Entity, ObjectId, ObjectIdColumn } from 'typeorm';
@@ -9,7 +8,7 @@ export class TimerEntity {
   _id: ObjectId;
 
   @Column()
-  timerId: UUID;
+  timerId: string;
 
   @Column()
   @IsDefined()
