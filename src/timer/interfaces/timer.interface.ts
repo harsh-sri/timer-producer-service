@@ -1,7 +1,7 @@
 import { UUID } from "bson";
 import { TimerStatus } from "src/common/enums/timer-status.enum";
 
-// TODO: As an improvement we can also return few more parameters
+// TODO: As an improvement we can also return few more parameters like timezone, usedId etc
 export interface ITimerRequestPayload {
     timerId: UUID;
     webhookUrl?: string;
