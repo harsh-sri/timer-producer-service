@@ -12,20 +12,20 @@ import { TimerModule } from './timer/timer.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        type: "mongodb",
+        type: 'mongodb',
         url: configService.mongo.uri,
         useNewUrlParser: true,
         minPoolSize: configService.mongo.minPoolSize,
         maxPoolSize: configService.mongo.maxPoolSize,
-        entities: [__dirname + "/**/*.entity{.ts,.js}"],
-        useUnifiedTopology: true
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        useUnifiedTopology: true,
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
     LoggerModule,
     HealthCheckModule,
     KafkaModule,
-    TimerModule
+    TimerModule,
   ],
   controllers: [],
   providers: [ConfigService, sLog],

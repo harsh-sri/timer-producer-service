@@ -8,8 +8,8 @@ import { ProducerService } from 'src/kafka/producer.service';
 import { TimerController } from './controllers/timer.controller';
 
 @Module({
-    imports: [KafkaModule, TypeOrmModule.forFeature([TimerEntity])],
-    controllers: [TimerController],
-    providers: [TimerService, ValidationPipe, ProducerService]
+  imports: [KafkaModule, TypeOrmModule.forFeature([TimerEntity])],
+  controllers: [TimerController],
+  providers: [TimerService, ValidationPipe, ProducerService],
 })
 export class TimerModule {}

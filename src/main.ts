@@ -10,7 +10,7 @@ async function bootstrap() {
     exclude: ['health'],
   });
   const configService: ConfigService = app.get(ConfigService);
-  const port = configService.get("PORT");
+  const port = configService.get('PORT');
   await setupApiDoc(app);
   await app.listen(port);
   Logger.log(`Application is running on port: ${port}`);

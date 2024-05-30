@@ -3,9 +3,9 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppLogger } from 'src/core';
 
 export const sLog: FactoryProvider = {
-    provide: APP_INTERCEPTOR,
-    scope: Scope.REQUEST,
-    inject: [AppLogger],
-    // eslint-disable-next-line
-    useFactory: (logger: AppLogger) => { },
+  provide: APP_INTERCEPTOR,
+  scope: Scope.REQUEST,
+  inject: [AppLogger],
+  // eslint-disable-next-line
+  useFactory: (logger: AppLogger) => {},
 };
