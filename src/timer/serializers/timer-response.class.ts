@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { TimerStatus } from 'src/common/enums/timer-status.enum';
-import { UUID } from 'typeorm/driver/mongodb/bson.typings';
 
 export class TimerResponse {
   @ApiProperty({
@@ -14,7 +13,7 @@ export class TimerResponse {
   @Expose({
     toPlainOnly: true,
   })
-  timerId: UUID;
+  timerId: string;
 
   @ApiProperty({
     type: 'number',

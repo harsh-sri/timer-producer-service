@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsUUID } from 'class-validator';
-import { UUID } from 'typeorm/driver/mongodb/bson.typings';
 
 export class GetTimerDto {
   @ApiProperty({
@@ -12,5 +11,5 @@ export class GetTimerDto {
   })
   @IsDefined()
   @IsUUID()
-  timerId: UUID;
+  timerId: string;
 }
