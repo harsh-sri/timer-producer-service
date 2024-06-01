@@ -33,7 +33,7 @@ Timer Producer Service to create and fetch timers
 - Redis
 
 ## Architecture Diagram
-TBD
+![screenshot](assets/producer-architecture.png)
 
 ## Installation
 
