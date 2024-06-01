@@ -33,6 +33,27 @@ Timer Producer Service to create and fetch timers
 - Redis
 
 ## Architecture Diagram
+In order to keep the systems decoupled and scalable, I have to brake down the requirement into three separate components as mentioned below:
+`Note`:
+- DB can be a bottleneck under a high write load. So,  to tackle this scenario, I have decided to process the timer data(`Create API`) asyncronously via message queue
+    - This approach also promotes `separation of concerns` and `Scalability`, since we can scale each system `independently`.
+- ### Producer Service
+    - This service will expose the `Create` & `Get` timer apis to the end user
+    - Get API might return `timer not found` error if its called right after the create timer API in some cases since the timer is being created asyncronously.
+        - In order to handle this scenario, we may use redis to hold the timer data 
+        - This approach can also be useful if we have large number of `READ` requests to the system
+
+- ### Consumer Service
+    - This service will only be responsible for consumering the message queue's message and persisting the data to database
+
+- ### Runner/Executer Service
+    - This service will be responsible for the following tasks
+        - Fetch the timer data from DB (Only scheduled) at a regular interval (cron job)
+        - Schedule the timers
+        - Fire the timers
+
+
+
 ![screenshot](assets/producer-architecture.png)
 
 ## Installation
@@ -80,8 +101,13 @@ http://localhost:3000/docs
 Please find the postman collection under `postman_collection` folder and import it into postman
 
 
-## Potential Improvements
+## Potential Improvements & Assumptions
+- Since, we're creating the timers asyncronously, So, we don't have any identifier to return to the user. In this case we have to provider an unique identifier back to the user so that user can use it in `GET` API. I have used a `timerId` which is created at the application layer and it's an `UUID`.
+    - [The probability of duplicate `UUID` is near to zero or negligible](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+- Webhook url validation can done in producer service while creating the timer to validate whether user is providing a valid url or not
+    - Sanitisation of the url against possible malacious attacks (sql injections etc)
 - Cache integration to reduce the load from DB for read requests (Get Timer API)
 - Multiple broker support
     - Or, choose an fully managed service like event bridge (investigation is required)
+    - [Fan out method implementation to avoid fetch data from db at a regular interval](https://en.wikipedia.org/wiki/Fan-out_(software))
  
