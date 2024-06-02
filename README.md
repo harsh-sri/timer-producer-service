@@ -54,14 +54,14 @@ In order to keep the systems decoupled and scalable, I have to brake down the re
 
 
 ---
-***overall architecture diagram***
+***Overall Architecture Diagram***
 
 ![screenshot](assets/overall-architecture.png)
 
 
 
 ---
-***overall architecture diagram***
+***Producer Service Architecture Diagram***
 
 ![screenshot](assets/producer-architecture.png)
 
