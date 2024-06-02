@@ -119,4 +119,5 @@ Please find the postman collection under `postman_collection` folder and import 
 - Multiple broker support
     - Or, choose an fully managed service like event bridge (investigation is required)
     - [Fan out method implementation to avoid fetch data from db at a regular interval](https://en.wikipedia.org/wiki/Fan-out_(software))
+- We may deploy this service in ***multiple region for to increase availability and implement failover***.
  
