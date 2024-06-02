@@ -53,6 +53,15 @@ In order to keep the systems decoupled and scalable, I have to brake down the re
         - Fire the timers
 
 
+---
+***Overall Architecture Diagram***
+
+![screenshot](assets/overall-architecture.png)
+
+
+
+---
+***Producer Service Architecture Diagram***
 
 ![screenshot](assets/producer-architecture.png)
 
