@@ -115,8 +115,9 @@ Please find the postman collection under `postman_collection` folder and import 
     - [The probability of duplicate `UUID` is near to zero or negligible](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 - Webhook url validation can done in producer service while creating the timer to validate whether user is providing a valid url or not
     - Sanitisation of the url against possible malacious attacks (sql injections etc)
-- Cache integration to reduce the load from DB for read requests (Get Timer API)
+- Cache integration to reduce the load from DB for read requests (Get Timer API) and it can be used to avoid single point of failure(DB) as well.
 - Multiple broker support
     - Or, choose an fully managed service like event bridge (investigation is required)
     - [Fan out method implementation to avoid fetch data from db at a regular interval](https://en.wikipedia.org/wiki/Fan-out_(software))
+- We may deploy this service in ***multiple region for to increase availability and implement failover***.
  
