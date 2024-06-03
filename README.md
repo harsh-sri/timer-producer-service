@@ -71,6 +71,11 @@ In order to keep the systems decoupled and scalable, I have to brake down the re
 $ npm install
 ```
 
+## Environment Setup
+- Create a `.env` file in the project root folder
+- Copy the env keys from `env.sample` and provide the correct values
+- Note: `Kafka` and `Redis` values are available in `env.sample` (if `redis` and `kafka` instances are running on local system using docker)
+
 ## Running the app
 
 ```bash
